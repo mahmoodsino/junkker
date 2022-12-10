@@ -1,8 +1,9 @@
 import React from "react";
 
 interface Props {
-  className?: String;
+  className?: string;
 }
+
 
 const Eye = ({ className }: Props) => {
   return (
