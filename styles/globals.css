@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.button__bar {
+    display: inline-block;
+    vertical-align: middle;
+    margin: auto;
+    right: -40%;
+    
+    margin-top: -35px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 40px;
+    width: 70px;
+    position: relative;
+    text-align: center;
+  }
+  
+  .button__bar li {
+    list-style: none;
+    
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 3px;
+    padding: 0;
+  }
+  
+  .button__bar li button {
+    border: none;
+    background: #ffff;
+    color: transparent;
+    cursor: pointer;
+    display: block;
+    height: 10px;
+    width: 10px;
+    border-radius: 7.5px;
+  }
+  
+  .button__bar li.slick-active button {
+    background-color: #E76F00;
+  }
+  
+  .button__bar li button:hover,
+  .button__bar li button:focus {
+    background: #818181;
+    outline: 0;
+  }
+  
+
+
+  .container {
+    padding: 1em;
+ }
+  .container .front-card {
+    margin: auto;
+    padding: 0.1em 1em;
+    color: white;
+    max-width: 450px;
+    height: 235px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #45484d 0%, #000 100%);
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
+    transition: transform 0.3s ease, box-shadow 0.2s ease-in;
+ }
+  .container .front-card:hover {
+    cursor: pointer;
+    transform: scale(1.015);
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.45);
+ }
+  .container .front-card #globe {
+    float: right;
+    margin-top: -1.7em;
+    margin-right: 0.2em;
+    font-size: 1.6em;
+ }
+  .container .front-card span {
+    font-weight: normal;
+    color: #f8f8f8;
+ }
+  .container .front-card #chip {
+    width: 50px;
+    height: 50px;
+    margin-top: 2.3em;
+    margin-left: 0.4em;
+    background: url(https://www.thebeneficial.com/portals/beneficialbankwebsite/images/chip.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+ }
+  .container .front-card .card-info #no {
+    font-size: 1.25em;
+    font-family: 'Cutive Mono';
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, .3);
+ }
+  .container .front-card .card-info #name {
+    font-family: 'Cutive Mono';
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-top: -0.5em;
+ }
+  .container .front-card .card-info #exp-date {
+    position: relative;
+    left: 11.5em;
+    bottom: 2em;
+    font-size: 0.8em;
+    opacity: 0.9;
+ }
+  .container .front-card #mastercard {
+    float: right;
+    margin-top: -6.3em;
+    background: url('http://www.pngall.com/wp-content/uploads/2016/07/Mastercard-PNG-Clipart.png');
+    width: 80px;
+    height: 65px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+ }

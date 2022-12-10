@@ -1,0 +1,1 @@
+export {default as BidsMainSections} from './MainSection'
