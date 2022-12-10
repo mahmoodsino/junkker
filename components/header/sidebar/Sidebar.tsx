@@ -32,7 +32,7 @@ const Sidebar = () => {
         <ul className="">
           {routes.map((route, i) => {
             return (
-              <li className={`border-b hover:bg-[#27304a] border-b-[#F1F1F1]/40 py-3 whitespace-nowrap ${pathname.slice(1) !== route.path.slice(1) ? "" : "bg-[#27304a]"}`} >
+              <li key={i} className={`border-b hover:bg-[#27304a] border-b-[#F1F1F1]/40 py-3 whitespace-nowrap ${pathname.slice(1) !== route.path.slice(1) ? "" : "bg-[#27304a]"}`} >
                 <Link href={route.path}>
                   <div className="flex flex-col justify-center items-center space-y-1">
                     <img className="h-[18px]" src={route.logo} alt="" />

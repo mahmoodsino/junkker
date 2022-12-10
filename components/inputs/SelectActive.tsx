@@ -13,9 +13,9 @@ const SelectActive = () => {
           : "bg-red2/5 border-red2 text-red2"
       }`}
     >
-      {options.map((item) => {
+      {options.map((item,i) => {
         return (
-          <option className="text-black" value={item}>
+          <option key={i} className="text-black" value={item}>
             {item}
           </option>
         );
