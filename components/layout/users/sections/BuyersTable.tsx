@@ -1,5 +1,13 @@
 import React from "react";
+import Pagination from "../../../pagination/Pagination";
 const info = [
+  {
+    a: "David Smith",
+    b: "JSmith@gmail.com",
+    c: "1-256-5655-555",
+    d: "783, Washington Ave, Hollytown NH 33220M (555) 555-5555H(555) 555-5555",
+    e: "30",
+  },
   {
     a: "David Smith",
     b: "JSmith@gmail.com",
@@ -49,44 +57,38 @@ const BuyersTable = () => {
   };
 
   return (
-    <table className="min-w-full ">
-      <thead className="bg-gray5 border-b ">
-        <tr>
-          <th
-            scope="col"
-            className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-          >
-            Name
-          </th>
-          <th
-            scope="col"
-            className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-          >
-            Email Address
-          </th>
-          <th
-            scope="col"
-            className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-          >
-            Phone Number
-          </th>
-          <th
-            scope="col"
-            className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-          >
-            Contact Info
-          </th>
-          <th
-            scope="col"
-            className="text-sm font-medium text-gray-900 px-6 py-4 text-left flex  items-center"
-          >
-            Junkkers’ Balance
-            <img src="/down-arrow.svg" alt="" />
-          </th>
-        </tr>
-      </thead>
-      <tbody className=" ">{handelTableBody()}</tbody>
-    </table>
+    <div>
+      <table className="min-w-full ">
+        <thead className="bg-gray5 border-b ">
+          <tr>
+            <th scope="col" className="text-sm font-bold px-6 py-4 text-left">
+              Name
+            </th>
+            <th scope="col" className="text-sm font-bold px-6 py-4 text-left">
+              Email Address
+            </th>
+            <th scope="col" className="text-sm font-bold px-6 py-4 text-left">
+              Phone Number
+            </th>
+            <th scope="col" className="text-sm font-bold px-6 py-4 text-left">
+              Contact Info
+            </th>
+            <th
+              scope="col"
+              className="text-sm font-bold text-gray-900 px-6 py-4 text-left flex  items-center"
+            >
+              Junkkers’ Balance
+              <img src="/down-arrow.svg" alt="" />
+            </th>
+          </tr>
+        </thead>
+        <tbody className=" ">{handelTableBody()}</tbody>
+      </table>
+
+      <div className="flex justify-center my-10">
+          <Pagination />
+      </div>
+    </div>
   );
 };
 

@@ -12,12 +12,12 @@ const RowDetails = ({ open }: Props) => {
       <td colSpan={6} className="">
         <div
           className={`${
-            open ? "h-[700px] mt-10" : "h-0 invisible"
+            open ? "h-[700px] mt-10" : "h-0 invisible overflow-hidden"
           } transition-all  duration-500 ease-in-out`}
         >
           <DetailsPhotoSlider />
           <Link href="/bids/numberofbids">
-          <div className="mt-10 flex justify-end px-44">
+          <div className="mt-10 flex justify-end w-[800px] max-w-[100%] m-auto">
             <button className="px-5 py-2 bg-red2 text-white font-bold rounded">20  Bids</button>
           </div>
           </Link>

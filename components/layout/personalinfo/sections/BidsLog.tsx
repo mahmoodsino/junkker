@@ -73,7 +73,7 @@ const BidsLog = () => {
               <tr>
                 <th
                   scope="col"
-                  className="text-sm font-medium text-gray-900 px-6 py-4 text-left flex"
+                  className="text-sm font-bold px-6 py-4 text-left flex"
                 >
                   Bid #
                   <button>
@@ -82,7 +82,7 @@ const BidsLog = () => {
                 </th>
                 <th
                   scope="col"
-                  className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  className="text-sm font-bold px-6 py-4 text-left"
                 >
                   Bid Name
                   <button>
@@ -91,7 +91,7 @@ const BidsLog = () => {
                 </th>
                 <th
                   scope="col"
-                  className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  className="text-sm font-bold px-6 py-4 text-left"
                 >
                   Pricing
                   <button>
@@ -100,7 +100,7 @@ const BidsLog = () => {
                 </th>
                 <th
                   scope="col"
-                  className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  className="text-sm font-bold px-6 py-4 text-left"
                 >
                   Date - Time
                   <button>
@@ -109,7 +109,7 @@ const BidsLog = () => {
                 </th>
                 <th
                   scope="col"
-                  className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  className="text-sm font-bold px-6 py-4 text-left"
                 >
                   Status
                   <button>

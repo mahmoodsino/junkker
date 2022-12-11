@@ -64,31 +64,31 @@ const MainSection = () => {
                 <tr>
                   <th
                     scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-bold px-6 py-4 text-left"
                   >
                     Bid #
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-bold px-6 py-4 text-left"
                   >
                     User Name
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-bold px-6 py-4 text-left"
                   >
                     Highest Price
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-bold px-6 py-4 text-left"
                   >
                     Reason
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-bold px-6 py-4 text-left"
                   >
                     Actions
                   </th>

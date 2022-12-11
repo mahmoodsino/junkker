@@ -12,7 +12,9 @@ const MainSection = () => {
       <tbody className="text-sm">
         <tr className="bg-white">
           <td className="pl-6 py-5 ">123</td>
-          <td className="pl-6  text-blue1">John Smith</td>
+          <td className="pl-6  text-blue1">
+            <button>John Smith</button>
+          </td>
           <td className="pl-6 ">Lorem ipsum dolor sit amet consectetur.</td>
           <td className="pl-6 ">30</td>
           <td className="pl-6 ">$350.00</td>
@@ -61,7 +63,7 @@ const MainSection = () => {
                 <tr>
                   <th
                     scope="col"
-                    className="text-sm font-medium  px-6 py-4 text-left flex items-center"
+                    className="text-sm font-bold  px-6 py-4 text-left flex items-center"
                   >
                     Bid #
                     <button>
@@ -70,31 +72,31 @@ const MainSection = () => {
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium  px-6 py-4 text-left"
+                    className="text-sm font-bold  px-6 py-4 text-left"
                   >
                     Seller Username
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium  px-6 py-4 text-left"
+                    className="text-sm font-bold  px-6 py-4 text-left"
                   >
                     Address
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium  px-6 py-4 text-left"
+                    className="text-sm font-bold  px-6 py-4 text-left"
                   >
                     Number of Bids
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium  px-6 py-4 text-left"
+                    className="text-sm font-bold  px-6 py-4 text-left"
                   >
                     Highest Bid
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium  px-6 py-4 text-left"
+                    className="text-sm font-bold  px-6 py-4 text-left"
                   >
                     Remaining Time
                   </th>

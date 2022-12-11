@@ -1,5 +1,4 @@
 import React from "react";
-import SelectInput from "../../../inputs";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,7 +10,6 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { BaseButton } from "../../../buttons";
 
 ChartJS.register(
   CategoryScale,
@@ -80,14 +78,8 @@ export const data = {
 
 const Chart = () => {
   return (
-    <div className="px-10 py-12">
-      <div className="space-x-3 flex">
-        <SelectInput optionName="Month" />
-        <SelectInput optionName="Day" />
-        <SelectInput optionName="Year" />
-        <BaseButton title="show" />
-      </div>
-      <div className="bg-white px-5 mt-10 py-5 rounded-xl">
+    <div className="px-10 ">
+      <div className="bg-white px-5  py-5 rounded-xl">
         <span className="font-bold text-lg text-gray1">Cash Orders</span>
         <Line options={options} data={data} />
       </div>

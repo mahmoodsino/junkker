@@ -3,8 +3,6 @@ import { BaseButton } from "../../../buttons";
 import { Title } from "../../../title";
 import AddComment from "./AddComment";
 
-
-
 const TicketInfo = () => {
   const [open, setOpen] = useState(false);
 
@@ -30,17 +28,19 @@ const TicketInfo = () => {
               <span className="font-bold ">Phone number:</span>
               <span className="text-sm "> 1-231-5665-6558</span>
             </div>
-            <div>
-              <span className="font-bold ">Email Address:</span>
-              <span className="text-sm "> LM@gmail.com</span>
-            </div>
-            <div>
-              <span className="font-bold ">Type:</span>
-              <span className="text-sm "> Buyer</span>
+            <div className="flex  space-x-3">
+              <div>
+                <span className="font-bold ">Email Address:</span>
+                <span className="text-sm "> LM@gmail.com</span>
+              </div>
+              <div>
+                <span className="font-bold ">Type:</span>
+                <span className="text-sm "> Buyer</span>
+              </div>
             </div>
           </div>
 
-          <div className="flex justify-start mt-5 space-x-20">
+          <div className="flex justify-between mt-5 space-x-20">
             <div>
               <span className="font-bold ">Bid:</span>
               <span className="text-sm "> Toyota Camry 2009</span>
@@ -75,15 +75,8 @@ const TicketInfo = () => {
             </button>
           </div>
         </div>
-        {open && (
-          <AddComment
-            open={open}
-            setOpen={setOpen}
-          />
-        )}
+        {open && <AddComment open={open} setOpen={setOpen} />}
       </div>
-
-      
     </div>
   );
 };

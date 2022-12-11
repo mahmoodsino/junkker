@@ -73,14 +73,6 @@ const inn ={
 }
 
 const MainSection = () => {
-
-    // useEffect (() => {
-    //     Object.keys(inn).map(item => {
-    //         const value = inn[item]
-    //         console.log({value});
-            
-    //     })
-    // },[])
   const handelTableBody = () => {
     return info.map((item, i) => {
       return (
@@ -89,7 +81,11 @@ const MainSection = () => {
           className={` text-sm ${i % 2 == 0 ? "bg-white" : "bg-[#F5F5F5]"}`}
         >
           <td className="pl-6 py-4 w-[16%]">{item.a}</td>
-          <td className="pl-6 w-[16%] text-blue1">{item.b}</td>
+          <td className="pl-6 w-[16%] text-blue1">
+            <button>
+            {item.b}
+            </button>
+            </td>
           <td className="pl-6 w-[16%]">{item.c}</td>
         </tr>
       );
@@ -106,19 +102,19 @@ const MainSection = () => {
                 <tr>
                   <th
                     scope="col"
-                    className="text-sm font-medium  px-6 py-4 text-left"
+                    className="text-sm font-bold  px-6 py-4 text-left"
                   >
                     #
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium  px-6 py-4 text-left"
+                    className="text-sm font-bold  px-6 py-4 text-left"
                   >
                     User Name
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium  px-6 py-4 text-left "
+                    className="text-sm font-bold  px-6 py-4 text-left "
                   >
                     Bidding Price
                     <button>
