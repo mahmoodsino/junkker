@@ -54,11 +54,12 @@ export const options = {
 const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
 export const data = {
+  labels,
   datasets: [
     {
       label: "Dataset 1",
       data: labels.map(() => [
-        1, 10, 100, 1000, 100000, 100000, 10000000, 10000000,
+        0.5,1,0.3,2,0.4,0.9,9,0.7,10,0.1,7
       ]),
       borderColor: "#FA5D3A",
       backgroundColor: "#FFEAE5",
@@ -67,7 +68,7 @@ export const data = {
     {
       label: "Dataset 2",
       data: labels.map(() => [
-        10000000, 100000, 100000, 1000, 100, 10, 1, 100000,
+        1,2,4,8,5,9,2
       ]),
       borderColor: "#414141",
       backgroundColor: "#CDCDCD",
@@ -89,7 +90,7 @@ const Chart = () => {
         </span>
         <Line options={options} data={data} />
       </div>
-      <div className="bg-white px-5 mt-10 py-5 rounded-xl">
+      <div className="bg-white px-5 my-10 py-5 rounded-xl">
         <span className="font-bold text-lg text-gray1">Company Profit</span>
         <Line options={options} data={data} />
       </div>

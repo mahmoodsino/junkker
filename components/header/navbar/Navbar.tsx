@@ -7,7 +7,7 @@ const Navbar = () => {
       <span className='font-bold text-gray1 text-lg'>Default Company Dashboard</span>
       <div className='flex items-center space-x-5'>
         <Link href="/">
-        <div className='border flex items-center rounded-md space-x-2 py-1.5 px-2.5 bg-bg-gray3 hover:bg-gray5 duration-300'>
+        <div className='border flex items-center rounded-md space-x-2 py-1.5 px-2.5 bg-gray3 hover:bg-gray5 duration-300'>
             <img className='h-5' src="/live.svg" alt="" />
             <span className='text-gray1 font-semibold '>Live Orders</span>
         </div>

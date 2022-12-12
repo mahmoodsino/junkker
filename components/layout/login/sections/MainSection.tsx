@@ -1,4 +1,5 @@
 import React from "react";
+import { FaLock, FaEnvelope } from "react-icons/fa";
 
 const MainSection = () => {
   return (
@@ -6,24 +7,12 @@ const MainSection = () => {
       <div className="container-login100">
         <div className="wrap-login100">
           <div className="login100-pic js-tilt" data-tilt>
-            <img
-              className="l-img"
-              src="https://4x4-backend.divcodes.com/img/logo.svg"
-              alt="IMG"
-            />
-            <h1 className="l-h">4X4 MOTORS</h1>
+            <img className="l-img" src="/logo.png" alt="IMG" />
+            <h1 className="l-h">Junkker</h1>
           </div>
 
-          <form
-            method="POST"
-            action="https://4x4-backend.divcodes.com/login"
-            className="login100-form validate-form"
-          >
-            <input
-              type="hidden"
-              name="_token"
-              value="BSKbyOyOUbsKdLpIlniKSHwA278PBXhu4dKycM2E"
-            />
+          <form className="login100-form validate-form">
+            <input type="hidden" />
             <span className="login100-form-title">Dashboard Login</span>
             <div
               className="wrap-input100 validate-input"
@@ -38,7 +27,7 @@ const MainSection = () => {
               />
               <span className="focus-input100"></span>
               <span className="symbol-input100">
-                <i className="fas fa-envelope" aria-hidden="true"></i>
+                <FaEnvelope />
               </span>
             </div>
             <div
@@ -54,7 +43,7 @@ const MainSection = () => {
               />
               <span className="focus-input100"></span>
               <span className="symbol-input100">
-                <i className="fas fa-lock" aria-hidden="true"></i>
+                <FaLock />
               </span>
             </div>
             <div className="form-group row mb-0">

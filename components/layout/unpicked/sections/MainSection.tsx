@@ -54,8 +54,7 @@ const MainSection = () => {
     <div className="py-12 px-7">
       <div className="border rounded-xl  bg-gray2  pb-5">
         <Title>
-          <img className="h-5" src="/pencil.svg" alt="" />
-          Manage Tickets
+          Unpicked junks
         </Title>
         <div className="overflow-x-auto  mt-5">
           <div className="overflow-hidden mx-5 border rounded-xl">
@@ -96,20 +95,6 @@ const MainSection = () => {
               </thead>
               <tbody className=" ">
                 {handelTableBody()}
-                {/* <tr className="bg-white">
-                  <td className="pl-6 py-4">1234</td>
-                  <td className="pl-6">Liam Murphy</td>
-                  <td className="pl-6">Rrrr</td>
-                  <td className="pl-6">
-                    Lorem ipsum dolor sit amet consectetur.
-                  </td>
-                  <td className="pl-6">Closed</td>
-                  <td className="pl-6">
-                    <div className="border border-primary w-10 h-10 flex justify-center items-center bg-primary/40 rounded-md">
-                      <Eye />
-                    </div>
-                  </td>
-                </tr> */}
               </tbody>
             </table>
           </div>
