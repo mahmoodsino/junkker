@@ -14,7 +14,7 @@ const routes = [
 ];
 
 const Sidebar = () => {
-  const { pathname, push, replace, query } = useRouter();
+  const { pathname} = useRouter();
 
   return (
     <aside
@@ -35,9 +35,8 @@ const Sidebar = () => {
         <ul className="">
           {routes.map((route, i) => {
             return (
-              <Link href={route.path}>
+              <Link key={i} href={route.path}>
                 <li
-                  key={i}
                   className={`border-b hover:bg-[#27304a] border-b-[#F1F1F1]/40 py-2 whitespace-nowrap ${
                     pathname.slice(1) !== route.path.slice(1)
                       ? ""
