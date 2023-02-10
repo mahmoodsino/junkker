@@ -1,12 +1,13 @@
-import React from 'react'
-import { USerMainSection } from '../components'
+import React from "react";
+import { UserMainSection } from "../components";
+import withAuth from "../helper/with-auth";
 
 const users = () => {
   return (
     <div>
-      <USerMainSection />
+      <UserMainSection />
     </div>
-  )
-}
+  );
+};
 
-export default users
+export default withAuth(users);

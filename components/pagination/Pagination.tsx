@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RightArrow } from "../icons";
 
-const pages = ["page1", "page2", "page3", "page4", "page5", "page6", "page7"];
 
-const Pagination = () => {
+interface Props {
+  currentPage: number;
+  setNext: () => void;
+  setPrev: () => void;
+  total: number;
+}
+
+let pages: number[] = [];
+const Pagination = ({ currentPage, setNext, setPrev, total }: Props) => {
+  useEffect(() => {
+    for (let i = 1; i <= total; i++) {
+      pages.push(i);
+    }
+  }, [total,currentPage]);
+
   return (
     <div className="flex ">
-      <button className="bg-gray1 rounded-l-full">
+      <button
+        disabled={currentPage == 1 ? true : false}
+        onClick={() => setPrev()}
+        className="bg-gray1 rounded-l-full"
+      >
         <RightArrow className="fill-white rotate-180" />
       </button>
       <div>
@@ -15,14 +32,18 @@ const Pagination = () => {
         >
           {pages.map((page, i) => {
             return (
-              <option key={i} value={page}>
-                {page}
+              <option placeholder={currentPage.toString()} key={i} value={page}>
+                {page} page
               </option>
             );
           })}
         </select>
       </div>
-      <button className="bg-gray1 rounded-r-full">
+      <button
+        disabled={currentPage === total ? true : false}
+        onClick={() => setNext()}
+        className="bg-gray1 rounded-r-full"
+      >
         <RightArrow className="fill-white " />
       </button>
     </div>

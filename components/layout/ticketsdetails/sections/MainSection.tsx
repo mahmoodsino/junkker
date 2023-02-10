@@ -5,14 +5,12 @@ import Commnets from "./Commnets";
 import TicketInfo from "./TicketInfo";
 
 const MainSection = () => {
-  const [comments, setComments] = useRecoilState(CommentsAtom)
+  const [comments, setComments] = useRecoilState(CommentsAtom);
 
   return (
     <div className="px-7 py-12">
       <TicketInfo />
-      {comments.length>0 &&
-      <Commnets />
-      }
+      {comments?.length > 0 && <Commnets />}
     </div>
   );
 };

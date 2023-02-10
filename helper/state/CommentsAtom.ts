@@ -1,7 +1,7 @@
 import { atom } from "recoil";
-import { CommentType } from "../type";
+import CommentsType from "../type/tickets/CommentsType";
 
-const CommentsAtom = atom<CommentType[]>({
+const CommentsAtom = atom<CommentsType[]>({
     key:"CommentsAtom",
     default:[]
 })

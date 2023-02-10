@@ -1,57 +1,64 @@
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useRecoilState } from "recoil";
+import { TokenAtom } from "../../../../helper";
+import { handelGetBuyerBidders } from "../../../../helper/server/services";
+import BuyerBiddersType from "../../../../helper/type/users/BuyerBiddersType";
 import { BaseInput, Search } from "../../../inputs";
 import { Title } from "../../../title";
 import ConfirmRefund from "./ConfirmRefund";
-import PasswordModal from "./PasswordModal";
-
-const info = [
-  {
-    a: 123,
-    b: "Toyota Camry 2016",
-    c: "$350.00",
-    d: "Nov, 08, 2022 09:51 PM",
-    e: "Lost",
-  },
-  {
-    a: 123,
-    b: "Toyota Camry 2016",
-    c: "$350.00",
-    d: "Nov, 08, 2022 09:51 PM",
-    e: "No bid",
-  },
-  {
-    a: 123,
-    b: "Toyota Camry 2016",
-    c: "$350.00",
-    d: "Nov, 08, 2022 09:51 PM",
-    e: "Won",
-  },
-  {
-    a: 123,
-    b: "Toyota Camry 2016",
-    c: "$350.00",
-    d: "Nov, 08, 2022 09:51 PM",
-    e: "Won",
-  },
-];
 
 const BidsLog = () => {
-    const [open,setOpen]=useState(false)
-    const [openConfirm,setOepnConfirm] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [openConfirm, setOepnConfirm] = useState(false);
+  const [token, setToken] = useRecoilState(TokenAtom);
+  const { query } = useRouter();
+  const [buyerBidders, setBuyerBidders] = useState<BuyerBiddersType[]>([]);
+  const [clickedId, setClickedId] = useState<number>(0);
+
+  useEffect(() => {
+    const getData = async () => {
+      if (query.id) {
+        const res = await handelGetBuyerBidders(token, +query.id);
+        if (res) {
+          setBuyerBidders(res.data);
+        } else {
+          toast.error("some thing went wrong !!");
+        }
+      }
+    };
+    getData();
+  }, []);
+
+  const refund = (id: number) => {
+    setClickedId(id);
+    setOpen(true);
+  };
+
   const handelTableBody = () => {
-    return info.map((item, i) => {
+    return buyerBidders.map((item, i) => {
       return (
         <tr
           key={i}
           className={` text-sm ${i % 2 == 0 ? "bg-white" : "bg-[#F5F5F5]"}`}
         >
-          <td className="pl-6 py-4 ">{item.a}</td>
-          <td className="pl-6 ">{item.b}</td>
-          <td className="pl-6 ">{item.c}</td>
-          <td className="pl-6">{item.d}</td>
-          <td className={`pl-6 flex justify-between items-center mr-5`}>
-            {item.e}
-            <button onClick={() => setOpen(true)} className="underline text-green1">REFUND</button>
+          <td className="pl-6 py-4 ">{item.bid.id}</td>
+          <td className="pl-6 ">{item.bid?.owner?.fullname}</td>
+          <td className="pl-6 ">{item.amount}</td>
+          <td className="pl-6">{item.bid.created_at}</td>
+          <td className={`pl-6 `}>
+            <div className="flex justify-between items-center mr-5">
+              {item.status}
+              {item.status=="won"&&
+              <button
+              onClick={() => refund(item.id)}
+              className="underline text-green1"
+              >
+                REFUND
+              </button>
+              }
+            </div>
           </td>
         </tr>
       );
@@ -118,16 +125,13 @@ const BidsLog = () => {
                 </th>
               </tr>
             </thead>
-            <tbody >{handelTableBody()}</tbody>
+            <tbody>{handelTableBody()}</tbody>
           </table>
         </div>
       </div>
-      {open && 
-      <ConfirmRefund open={open} setOpen={setOpen} setOepnConfirm={setOepnConfirm} />
-      }
-      {openConfirm && 
-      <PasswordModal open={openConfirm} setOpen={setOepnConfirm} />
-      }
+      {open && (
+        <ConfirmRefund clickedId={clickedId} open={open} setOpen={setOpen} />
+      )}
     </div>
   );
 };

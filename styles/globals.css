@@ -7,26 +7,35 @@
 @tailwind utilities;
 
 
-.hiddEff:hover span {
-    display: block;
-    animation: sidebarShow 0.5s ease-in-out forwards;
+.hiddEff .span {
+    opacity: 0;
+    height: 0;
+    transition: .5s;
 }
 
-@keyframes  sidebarShow {
-   0%{
-    opacity: 0;
-   }
-   20%{
-    opacity: 0.2;
-   }
-   50%{
-    opacity: 0.5;
-   }
-   80%{
-    opacity: 0.8;
-   }
-   100%{
-    display: block;
+.hiddEff:hover .span {
     opacity: 1;
-   }
-  }
+    height: 35px;
+    margin-top: 3px;
+}
+
+/* @keyframes sidebarShow {
+    0% {
+        opacity: 0;
+        height: 0px;
+    }
+
+    50% {
+        opacity: 0.2;
+        height: 25px;
+    }
+
+    100% {
+        opacity: 1;
+        height: 30px;
+    }
+} */
+
+.react-responsive-modal-modal{
+    border-radius: 7px;
+}

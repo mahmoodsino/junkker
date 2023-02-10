@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
 import PersonalInformation from "./PersonalInformation";
 import Wallet from "./Wallet";
 
 const MainSection = () => {
   const [index, setIndex] = useState(1);
+  const { query } = useRouter();
+
 
   const taps = () => {
     return (
@@ -34,13 +37,12 @@ const MainSection = () => {
     );
   };
 
-  return <div className="py-9 mx-5 ">
-    {taps()}
-    {index === 1 ?
-    <PersonalInformation /> :
-    <Wallet />
-  }
-    </div>;
+  return (
+    <div className="py-9 mx-5 ">
+      {taps()}
+      {index === 1 ? <PersonalInformation /> : query.id &&  <Wallet id={+query.id} />}
+    </div>
+  );
 };
 
 export default MainSection;

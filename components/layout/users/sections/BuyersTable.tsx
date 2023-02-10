@@ -1,56 +1,92 @@
-import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useRecoilState } from "recoil";
+import { TokenAtom } from "../../../../helper";
+import { handelGetBuyer } from "../../../../helper/server/services";
+import BuyerType from "../../../../helper/type/users/BuyerType";
+import { Loading } from "../../../loading";
 import Pagination from "../../../pagination/Pagination";
-const info = [
-  {
-    a: "David Smith",
-    b: "JSmith@gmail.com",
-    c: "1-256-5655-555",
-    d: "783, Washington Ave, Hollytown NH 33220M (555) 555-5555H(555) 555-5555",
-    e: "30",
-  },
-  {
-    a: "David Smith",
-    b: "JSmith@gmail.com",
-    c: "1-256-5655-555",
-    d: "783, Washington Ave, Hollytown NH 33220M (555) 555-5555H(555) 555-5555",
-    e: "30",
-  },
-  {
-    a: "David Smith",
-    b: "JSmith@gmail.com",
-    c: "1-256-5655-555",
-    d: "783, Washington Ave, Hollytown NH 33220M (555) 555-5555H(555) 555-5555",
-    e: "30",
-  },
-  {
-    a: "David Smith",
-    b: "JSmith@gmail.com",
-    c: "1-256-5655-555",
-    d: "783, Washington Ave, Hollytown NH 33220M (555) 555-5555H(555) 555-5555",
-    e: "30",
-  },
-  {
-    a: "David Smith",
-    b: "JSmith@gmail.com",
-    c: "1-256-5655-555",
-    d: "783, Washington Ave, Hollytown NH 33220M (555) 555-5555H(555) 555-5555",
-    e: "30",
-  },
-];
+import { QueryProps } from "./MainSection";
 
-const BuyersTable = () => {
+interface Props {
+  usersQueryFilters: QueryProps;
+  setUsersQueryFilters: any;
+}
+
+const BuyersTable = ({ setUsersQueryFilters, usersQueryFilters }: Props) => {
+  const [token, setToken] = useRecoilState(TokenAtom);
+  const [buyers, setBuyers] = useState<BuyerType[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [totalPages, setTotalPages] = useState<number>(0);
+
+  const {replace,query} = useRouter()
+
+  useEffect(() => {
+    setLoading(true);
+    const getData = async () => {
+      const res = await handelGetBuyer({
+        token: token,
+        page: usersQueryFilters.page,
+        text: usersQueryFilters.text,
+      });
+      if (res !== null) {
+        setBuyers(res.data);
+        setTotalPages(res.total)
+      } else {
+        toast.error("some thing wrong");
+      }
+      setLoading(false);
+    };
+    if(token){
+      getData();
+    }
+  }, [usersQueryFilters,token]);
+
+  const setNext = () => {
+    setUsersQueryFilters((prev:any) => {
+      return { ...prev, page: usersQueryFilters.page + 1 };
+    });
+
+    let next = usersQueryFilters.page + 1;
+
+    replace({ query: { ...query, page: next } }, undefined, {
+      scroll: true,
+    });
+  };
+
+  const setPrev = () => {
+    setUsersQueryFilters((prev:any) => {
+      return { ...prev, page: usersQueryFilters.page - 1 };
+    });
+
+    let prev = usersQueryFilters.page - 1;
+
+    replace({ query: { ...query, page: prev } }, undefined, {
+      scroll: true,
+    });
+  };
+
   const handelTableBody = () => {
-    return info.map((item, i) => {
+    return buyers.map((item, i) => {
       return (
         <tr
           key={i}
           className={` text-sm ${i % 2 == 0 ? "bg-white" : "bg-[#F5F5F5]"}`}
         >
-          <td className="pl-6 py-5 w-[16%]">{item.a}</td>
-          <td className="pl-6 w-[16%]">{item.b}</td>
-          <td className="pl-6 w-[20%]">{item.c}</td>
-          <td className="pl-6 w-[30%]">{item.d}</td>
-          <td className="pl-6 w-[22%]">{item.e}</td>
+          <td className="pl-6 py-5 w-[16%]">
+            <Link
+              className="text-blue1"
+              href={`/users/personalinfo?id=${item.id}`}
+            >
+              {item.name}
+            </Link>
+          </td>
+          <td className="pl-6 w-[16%]">{item.email}</td>
+          <td className="pl-6 w-[20%]">{item.phone}</td>
+          <td className="pl-6 w-[30%]">{item.address}</td>
+          <td className="pl-6 w-[22%]">{item.junkkers}</td>
         </tr>
       );
     });
@@ -58,36 +94,58 @@ const BuyersTable = () => {
 
   return (
     <div>
-      <table className="min-w-full ">
-        <thead className="bg-gray5 border-b ">
-          <tr>
-            <th scope="col" className="text-sm font-bold px-6 py-4 text-left">
-              Name
-            </th>
-            <th scope="col" className="text-sm font-bold px-6 py-4 text-left">
-              Email Address
-            </th>
-            <th scope="col" className="text-sm font-bold px-6 py-4 text-left">
-              Phone Number
-            </th>
-            <th scope="col" className="text-sm font-bold px-6 py-4 text-left">
-              Contact Info
-            </th>
-            <th
-              scope="col"
-              className="text-sm font-bold text-gray-900 px-6 py-4 text-left flex  items-center"
-            >
-              Junkkers’ Balance
-              <img src="/down-arrow.svg" alt="" />
-            </th>
-          </tr>
-        </thead>
-        <tbody className=" ">{handelTableBody()}</tbody>
-      </table>
-
+      {!loading ? (
+        <div>
+          <table className="min-w-full ">
+            <thead className="bg-gray5 border-b ">
+              <tr>
+                <th
+                  scope="col"
+                  className="text-sm font-bold px-6 py-4 text-left"
+                >
+                  Name
+                </th>
+                <th
+                  scope="col"
+                  className="text-sm font-bold px-6 py-4 text-left"
+                >
+                  Email Address
+                </th>
+                <th
+                  scope="col"
+                  className="text-sm font-bold px-6 py-4 text-left"
+                >
+                  Phone Number
+                </th>
+                <th
+                  scope="col"
+                  className="text-sm font-bold px-6 py-4 text-left"
+                >
+                  Contact Info
+                </th>
+                <th
+                  scope="col"
+                  className="text-sm font-bold text-gray-900 px-6 py-4 text-left flex  items-center"
+                >
+                  Junkkers’ Balance
+                  <img src="/down-arrow.svg" alt="" />
+                </th>
+              </tr>
+            </thead>
+            <tbody className=" ">{handelTableBody()}</tbody>
+          </table>
+        </div>
+      ) : (
+        <Loading className="h-20" />
+      )}
+      {totalPages>1&&
       <div className="flex justify-center my-10">
-          <Pagination />
+        <Pagination  total={totalPages}
+          setPrev={setPrev}
+          setNext={setNext}
+          currentPage={usersQueryFilters.page} />
       </div>
+        }
     </div>
   );
 };

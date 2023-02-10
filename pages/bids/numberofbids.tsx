@@ -1,5 +1,6 @@
 import React from 'react'
 import { NumberOfBidsMainSection } from '../../components'
+import withAuth from '../../helper/with-auth'
 
 const numberofbids = () => {
   return (
@@ -9,4 +10,4 @@ const numberofbids = () => {
   )
 }
 
-export default numberofbids
+export default withAuth( numberofbids)

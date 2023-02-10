@@ -1,5 +1,7 @@
 import React from 'react'
 import { BidsMainSections } from '../components'
+import withAuth from '../helper/with-auth'
+
 
 const bids = () => {
   return (
@@ -9,4 +11,4 @@ const bids = () => {
   )
 }
 
-export default bids
+export default withAuth(bids)

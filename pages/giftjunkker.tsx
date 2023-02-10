@@ -1,5 +1,6 @@
 import React from 'react'
 import { GiftMainSection } from '../components'
+import withAuth from '../helper/with-auth'
 
 const giftjunkker = () => {
   return (
@@ -9,4 +10,4 @@ const giftjunkker = () => {
   )
 }
 
-export default giftjunkker
+export default withAuth(giftjunkker)

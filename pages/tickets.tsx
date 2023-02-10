@@ -1,5 +1,6 @@
 import React from 'react'
 import { TicketsMainSection } from '../components'
+import withAuth from '../helper/with-auth'
 
 const tickets = () => {
   return (
@@ -9,4 +10,4 @@ const tickets = () => {
   )
 }
 
-export default tickets
+export default withAuth(tickets)

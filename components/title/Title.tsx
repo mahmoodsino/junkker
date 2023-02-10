@@ -6,7 +6,7 @@ interface Props {
 
 const Title = ({children}:Props) => {
   return (
-    <h2 className="flex bg-gray4 border-b font-bold items-center space-x-2 rounded-t-xl px-5 py-3 text-xl text-gray1">
+    <h2 className="flex bg-gray4 border-b font-bold text-gray1 text-lg items-center space-x-2 rounded-t-xl px-5 py-3 ">
           {children}
         </h2>
   )

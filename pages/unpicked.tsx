@@ -1,5 +1,6 @@
 import React from 'react'
 import { UnpickedMainSection } from '../components'
+import withAuth from '../helper/with-auth'
 
 const unpicked = () => {
   return (
@@ -9,4 +10,4 @@ const unpicked = () => {
   )
 }
 
-export default unpicked
+export default withAuth(unpicked)

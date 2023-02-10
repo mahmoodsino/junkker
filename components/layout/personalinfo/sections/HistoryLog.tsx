@@ -1,18 +1,25 @@
 import React from 'react'
+import JunkkersHistoryType from '../../../../helper/type/users/JunkkersHistoryType'
 
-const HistoryLog = () => {
+
+interface Props {
+  junkkers : JunkkersHistoryType
+}
+
+
+const HistoryLog = ({junkkers}:Props) => {
   return (
     <div className="bg-white mt-5 flex justify-between items-center rounded-xl px-8 py-3">
           <div>
-            <h5 className="font-bold text-lg">30</h5>
+            <h5 className="font-bold text-lg">{junkkers.old}</h5>
             <span className="text-xs">Old Junkkers</span>
           </div>
           <div>
-            <h5 className="font-bold text-lg text-red2">-1</h5>
+            <h5 className="font-bold text-lg text-red2">{junkkers.adjust}</h5>
             <span className="text-xs">Adjustment</span>
           </div>
           <div>
-            <h5 className="font-bold text-lg">29</h5>
+            <h5 className="font-bold text-lg">{junkkers.new}</h5>
             <span className="text-xs">New Junkkers</span>
           </div>
           <div>

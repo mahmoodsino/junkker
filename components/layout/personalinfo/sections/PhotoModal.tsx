@@ -1,20 +1,21 @@
 import React from 'react'
 import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
+import licensesType from '../../../../helper/type/users/licensesType';
 
 
 interface Props {
     open:boolean,
     setOpen:any
-    img:string
+    images:licensesType
 }
 
-const PhotoModal = ({img,open,setOpen}:Props) => {
+const PhotoModal = ({images,open,setOpen}:Props) => {
   return (
     <div>
       <Modal open={open} onClose={() => setOpen(false)} center>
         <div className=''>
-               <img className='px-10 py-10' src={img} alt="" /> 
+               <img className='px-5 py-5' src={images.file} alt="" /> 
         </div>
       </Modal>
     </div>

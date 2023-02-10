@@ -1,48 +1,66 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { useRecoilState } from "recoil";
+import {  UserDetailsAtom } from "../../../../helper";
+import licensesType from "../../../../helper/type/users/licensesType";
 import { SelectActive } from "../../../inputs";
 import { Title } from "../../../title";
 import PhotoModal from "./PhotoModal";
 
 const Information = () => {
   const [open, setOpen] = useState(false);
+  const [useDetails, setUserDetails] = useRecoilState(UserDetailsAtom);
+  const { query } = useRouter();
+  const [clickedFile,setClickedFile] = useState<licensesType>({} as licensesType)
 
   return (
     <div className="w-[48%] border rounded-xl  bg-gray2">
       <Title>Personal Information</Title>
       <div className="flex items-center space-x-5 px-5 mt-5">
         <span className="text-gray1 font-semibold text-lg">Active:</span>
-        <SelectActive />
+        <SelectActive
+          id={query.id !== undefined ? +query.id : null}
+          status={useDetails.status}
+        />
       </div>
       <div className="flex text-gray1 items-center space-x-5 px-5 mt-3">
         <span className=" font-semibold text-lg">First Name:</span>
-        <span>John</span>
+        <span>{useDetails.name}</span>
       </div>
       <div className="flex text-gray1 items-center space-x-5 px-5 mt-3">
         <span className=" font-semibold text-lg">Last Name:</span>
-        <span>Smith</span>
+        <span>{useDetails.name}</span>
       </div>
       <div className="flex text-gray1 items-center space-x-5 px-5 mt-3">
         <span className=" font-semibold text-lg">Email Address:</span>
-        <span>JSmith@gmail.com</span>
+        <span>{useDetails.email}</span>
       </div>
       <div className="flex text-gray1 items-center space-x-5 px-5 mt-3">
         <span className=" font-semibold text-lg">Phone Number:</span>
-        <span>1-235-6565-987</span>
+        <span>{useDetails.phone}</span>
+      </div>
+      <div className="text-gray1 items-center space-x-5 px-5 my-3">
+      <span className=" font-semibold text-lg">Tax id:</span>
+
       </div>
       <div className="text-gray1 items-center space-x-5 px-5 my-3">
         <span className=" font-semibold text-lg">Attachments</span>
         <div>
-          <button onClick={() => setOpen(true)} className="flex items-center ">
-            <img className="mr-2" src="/link.svg" alt="" />
-            a.png
-          </button>
-          <button className="flex items-center">
-            <img className="mr-2" src="/link.svg" alt="" />
-            b.png
-          </button>
+          {useDetails?.licenses?.map((item, i) => {
+            return (
+              <button
+                key={i}
+                onClick={() => (setOpen(true),setClickedFile(item))}
+                className="flex items-center "
+              >
+                <img className="mr-2" src="/link.svg" alt="" />
+                {/* {item.name} */}
+              </button>
+            );
+          })}
         </div>
       </div>
-      {open && <PhotoModal img="/image.png" open={open} setOpen={setOpen} />}
+      {open && <PhotoModal images={clickedFile} open={open} setOpen={setOpen} />}
     </div>
   );
 };

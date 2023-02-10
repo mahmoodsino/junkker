@@ -1,1 +1,1 @@
-export {default as USerMainSection} from "./MainSection"
+export { default as UserMainSection } from "./MainSection"

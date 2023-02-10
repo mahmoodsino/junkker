@@ -1,0 +1,1 @@
+export {default as BlogMainSectoins} from "./MainSectoins"
