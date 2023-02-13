@@ -49,10 +49,10 @@ const MainSectoins = () => {
         }
       }
     };
-    if(token){
+    if (token) {
       getData();
     }
-  }, [query.blogID,token]);
+  }, [query.blogID, token]);
 
   useEffect(() => {
     setValue(blog.body);
@@ -98,7 +98,7 @@ const MainSectoins = () => {
 
   return (
     <div className="py-12 px-7">
-      <div className="border rounded-xl  bg-gray2  pb-5">
+      <div className="border rounded-xl  bg-gray2  ">
         <Title>
           <div className="flex  w-full justify-between items-center">
             <span>Add Blog</span>
@@ -165,9 +165,9 @@ const MainSectoins = () => {
             </label>
           </div>
           <ReactQuill
-          value={value}
+            value={value}
             theme="snow"
-            className="h-[300px]"
+            className="h-[300px] bg-white"
             onChange={setValue}
             placeholder={"Write something awesome..."}
             formats={MainSectoins.formats}
@@ -199,7 +199,7 @@ MainSectoins.modules = {
       { indent: "-1" },
       { indent: "+1" },
     ],
-    ["link", "image", "video"],
+    ["link"],
     ["clean"],
   ],
 };
@@ -220,8 +220,6 @@ MainSectoins.formats = [
   "bullet",
   "indent",
   "link",
-  "image",
-  "video",
   "color",
   "code-block",
 ];

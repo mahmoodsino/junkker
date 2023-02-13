@@ -23,6 +23,7 @@ const MainSection = () => {
   const [title, SetTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useRecoilState(TokenAtom);
+  const [load,setLoad] = useState(false)
   const onDrop = useCallback(
     (acceptedFiles: any) => {
       setFile(acceptedFiles[0]);
@@ -42,13 +43,14 @@ const MainSection = () => {
 
   useEffect(() => {
     const getData = async () => {
+      setLoad(true)
       const res = await handelGetAbouPage(token);
       if (res) {
         setAbout(res.data);
-        console.log(res);
       } else {
         toast.error("some thing went wrong");
       }
+      setLoad(false)
     };
     if (token) {
       getData();
@@ -66,7 +68,9 @@ const MainSection = () => {
       setLoading(true);
       const data = new FormData();
       data.append("title", title);
-      data.append("img", file);
+      if(file?.name?.length>0){
+        data.append("img", file);
+      }
       data.append("body", value);
       const res = await handelUpdateAbouPage(token, data);
       if (res) {
@@ -81,6 +85,7 @@ const MainSection = () => {
 
   return (
     <div className="py-12 px-7">
+      {!load ?
       <div className="border rounded-xl  bg-gray2  pb-5">
         <Title>
           <div className="flex  w-full justify-between items-center">
@@ -150,7 +155,7 @@ const MainSection = () => {
           <ReactQuill
             value={value}
             theme="snow"
-            className="h-[300px]"
+            className="h-[300px] bg-white"
             onChange={setValue}
             placeholder={"Write something awesome..."}
             formats={MainSection.formats}
@@ -166,7 +171,9 @@ const MainSection = () => {
             <Loading className="w-10" />
           </div>
         )}
-      </div>
+      </div> : 
+      <Loading className="w-20" />
+      }
     </div>
   );
 };
@@ -182,7 +189,7 @@ MainSection.modules = {
       { indent: "-1" },
       { indent: "+1" },
     ],
-    ["link", "image", "video"],
+    ["link"],
     ["clean"],
   ],
 };
@@ -203,8 +210,7 @@ MainSection.formats = [
   "bullet",
   "indent",
   "link",
-  "image",
-  "video",
+ 
   "color",
   "code-block",
 ];

@@ -9,6 +9,7 @@ import BuyerType from "../../../../helper/type/users/BuyerType";
 import { Loading } from "../../../loading";
 import Pagination from "../../../pagination/Pagination";
 import { QueryProps } from "./MainSection";
+import UserMapModal from "./UserMapModal";
 
 interface Props {
   usersQueryFilters: QueryProps;
@@ -20,8 +21,10 @@ const BuyersTable = ({ setUsersQueryFilters, usersQueryFilters }: Props) => {
   const [buyers, setBuyers] = useState<BuyerType[]>([]);
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState<number>(0);
-
-  const {replace,query} = useRouter()
+  const [mapModal, setMapModal] = useState(false);
+  const { replace, query } = useRouter();
+  const [lat, setLat] = useState<number>(0);
+  const [lng, setLng] = useState<number>(0);
 
   useEffect(() => {
     setLoading(true);
@@ -33,19 +36,19 @@ const BuyersTable = ({ setUsersQueryFilters, usersQueryFilters }: Props) => {
       });
       if (res !== null) {
         setBuyers(res.data);
-        setTotalPages(res.total)
+        setTotalPages(res.total);
       } else {
         toast.error("some thing wrong");
       }
       setLoading(false);
     };
-    if(token){
+    if (token) {
       getData();
     }
-  }, [usersQueryFilters,token]);
+  }, [usersQueryFilters, token]);
 
   const setNext = () => {
-    setUsersQueryFilters((prev:any) => {
+    setUsersQueryFilters((prev: any) => {
       return { ...prev, page: usersQueryFilters.page + 1 };
     });
 
@@ -57,7 +60,7 @@ const BuyersTable = ({ setUsersQueryFilters, usersQueryFilters }: Props) => {
   };
 
   const setPrev = () => {
-    setUsersQueryFilters((prev:any) => {
+    setUsersQueryFilters((prev: any) => {
       return { ...prev, page: usersQueryFilters.page - 1 };
     });
 
@@ -83,13 +86,31 @@ const BuyersTable = ({ setUsersQueryFilters, usersQueryFilters }: Props) => {
               {item.name}
             </Link>
           </td>
-          <td className="pl-6 w-[16%]">{item.email}</td>
-          <td className="pl-6 w-[20%]">{item.phone}</td>
-          <td className="pl-6 w-[30%]">{item.address}</td>
-          <td className="pl-6 w-[22%]">{item.junkkers}</td>
+          <td className="pl-6 ">{item.email}</td>
+          <td className="pl-6 ">{item.phone}</td>
+          <td className="pl-6 ">{item.address}</td>
+          <td className="pl-6 ">
+            <div className="flex justify-between pr-5 ">
+              {item.junkkers}
+              {item.lat !== null && (
+                <button
+                  onClick={() => handelMap(item.lat, item.lng)}
+                  className="text-secoundary"
+                >
+                  Show on map
+                </button>
+              )}
+            </div>
+          </td>
         </tr>
       );
     });
+  };
+
+  const handelMap = (lat: number, lng: number) => {
+    setLat(lat);
+    setLng(lng);
+    setMapModal(true);
   };
 
   return (
@@ -128,7 +149,7 @@ const BuyersTable = ({ setUsersQueryFilters, usersQueryFilters }: Props) => {
                   className="text-sm font-bold text-gray-900 px-6 py-4 text-left flex  items-center"
                 >
                   Junkkers’ Balance
-                  <img src="/down-arrow.svg" alt="" />
+                  {/* <img src="/down-arrow.svg" alt="" /> */}
                 </th>
               </tr>
             </thead>
@@ -138,14 +159,24 @@ const BuyersTable = ({ setUsersQueryFilters, usersQueryFilters }: Props) => {
       ) : (
         <Loading className="h-20" />
       )}
-      {totalPages>1&&
-      <div className="flex justify-center my-10">
-        <Pagination  total={totalPages}
-          setPrev={setPrev}
-          setNext={setNext}
-          currentPage={usersQueryFilters.page} />
-      </div>
-        }
+      {totalPages > 1 && (
+        <div className="flex justify-center my-10">
+          <Pagination
+            total={totalPages}
+            setPrev={setPrev}
+            setNext={setNext}
+            currentPage={usersQueryFilters.page}
+          />
+        </div>
+      )}
+      {mapModal && (
+        <UserMapModal
+          open={mapModal}
+          setOpen={setMapModal}
+          lat={lat}
+          lng={lng}
+        />
+      )}
     </div>
   );
 };

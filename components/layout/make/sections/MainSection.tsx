@@ -57,16 +57,16 @@ const MainSection = () => {
           key={i}
           className={` text-sm ${i % 2 == 0 ? "bg-white" : "bg-[#F5F5F5]"}`}
         >
-          <td className="pl-6 py-5 w-[16%]">{item.id}</td>
-          <td className="pl-6 w-[16%] text-blue1">
+          <td className="pl-6 py-5 ">{item.id}</td>
+          <td className="pl-6  text-blue1">
             <div className="w-12 h-12 py-2">
               <img src={item.logo} className="border" alt="" />
             </div>
           </td>
-          <td className="pl-6 w-[16%] ">
-            <div className="flex items-center space-x-14">
-              <span className="block w-[150px]">{item.name}</span>
-              <div className="flex items-center ">
+          <td className="pl-6   ">
+            <div className="flex justify-between pr-10 items-center space-x-14">
+              <span className=" ">{item.name}</span>
+              <div className="flex  items-center ">
                 <button
                   onClick={() => handelUpdate(item.name, item.logo, item.id)}
                   title="edit"
@@ -107,21 +107,21 @@ const MainSection = () => {
                   <tr>
                     <th
                       scope="col"
-                      className="text-sm font-bold  px-6 py-4 text-left"
+                      className="text-sm font-bold w-0  px-6 py-4 text-left"
                     >
                       #id
                     </th>
                     <th
                       scope="col"
-                      className="text-sm font-bold  px-6 py-4 text-left"
+                      className="text-sm w-0 font-bold  px-6 py-4 text-left"
                     >
-                      logo
+                      Logo
                     </th>
                     <th
                       scope="col"
                       className="text-sm font-bold  px-6 py-4 text-left "
                     >
-                      name
+                      Name
                       {/* <button>
                       <img src="/arrows.svg" alt="" />
                     </button> */}

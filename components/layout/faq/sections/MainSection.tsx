@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import AddFAQModa from "./AddFAQModa";
 import { BaseButton } from "../../../buttons";
 import DeleteFAQModal from "./DeleteFAQModal";
+import { Loading } from "../../../loading";
 
 const MainSectoins = () => {
   const [answer, setAnswer] = useState("");
@@ -23,8 +24,8 @@ const MainSectoins = () => {
   const [clickedORder, setClickedOrder] = useState<number>(0);
 
   useEffect(() => {
-    setLoading(true);
     const getData = async () => {
+      setLoading(true);
       const res = await handelGetFaq(token);
       if (res) {
         setFaq(res.data);
@@ -33,12 +34,12 @@ const MainSectoins = () => {
       }
       setLoading(false);
     };
-    if (openEditModal == false && openDeletModal == false&&token) {
+    if (openEditModal == false && openDeletModal == false && token) {
       getData();
       setAnswer("");
       setQuation("");
     }
-  }, [openDeletModal, openEditModal,token]);
+  }, [openDeletModal, openEditModal, token]);
 
   const handelUpdate = (
     answer: string,
@@ -95,52 +96,56 @@ const MainSectoins = () => {
 
   return (
     <div className="py-12 px-7">
-      <div className="border rounded-xl  bg-gray2  pb-5">
-        <Title>
-          <div className="flex  w-full justify-between items-center">
-            <span>FAQ</span>
-            <BaseButton
-              title="Add FAQ"
-              onClick={() => setOpenEditModal(true)}
-              className="text-secoundary border border-secoundary px-3 py-1 rounded-md"
-            />
-          </div>
-        </Title>
-        <div className="px-5 py-10  m-auto">
-          <div className="overflow-x-auto ">
-            <div className="overflow-hidden mx-5 border rounded-xl">
-              <table className="min-w-full ">
-                <thead className="bg-gray5 border-b ">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold  px-6 py-4 text-left flex items-center"
-                    >
-                      id #
-                      <button>
-                        <img src="/arrows.svg" alt="" />
-                      </button>
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold  px-6 py-4 text-left"
-                    >
-                      question
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold  px-6 py-4 text-left"
-                    >
-                      answer
-                    </th>
-                  </tr>
-                </thead>
-                {handelTableBody()}
-              </table>
+      {!loading ? (
+        <div className="border rounded-xl  bg-gray2  pb-5">
+          <Title>
+            <div className="flex  w-full justify-between items-center">
+              <span>FAQ</span>
+              <BaseButton
+                title="Add FAQ"
+                onClick={() => setOpenEditModal(true)}
+                className="text-secoundary border border-secoundary px-3 py-1 rounded-md"
+              />
+            </div>
+          </Title>
+          <div className="px-5 py-10  m-auto">
+            <div className="overflow-x-auto ">
+              <div className="overflow-hidden mx-5 border rounded-xl">
+                <table className="min-w-full ">
+                  <thead className="bg-gray5 border-b ">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="text-sm font-bold  px-6 py-4 text-left flex items-center"
+                      >
+                        id #
+                        <button>
+                          <img src="/arrows.svg" alt="" />
+                        </button>
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-bold  px-6 py-4 text-left"
+                      >
+                        Question
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-bold  px-6 py-4 text-left"
+                      >
+                        Answer
+                      </th>
+                    </tr>
+                  </thead>
+                  {handelTableBody()}
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <Loading className="w-20" />
+      )}
       {openEditModal &&
         (answer && qestion ? (
           <AddFAQModa
@@ -154,13 +159,13 @@ const MainSectoins = () => {
         ) : (
           <AddFAQModa open={openEditModal} setOpen={setOpenEditModal} />
         ))}
-         {openDeletModal && (
-          <DeleteFAQModal
-            open={openDeletModal}
-            setOpen={setOpenDeletModal}
-            id={clickedId}
-          />
-        )}
+      {openDeletModal && (
+        <DeleteFAQModal
+          open={openDeletModal}
+          setOpen={setOpenDeletModal}
+          id={clickedId}
+        />
+      )}
     </div>
   );
 };

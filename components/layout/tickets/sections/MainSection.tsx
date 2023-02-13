@@ -134,7 +134,7 @@ const MainSection = () => {
           Manage Tickets
         </Title>
 
-        <div className="flex justify-end px-5 py-7">
+        <div className="flex justify-end px-5 py-3">
           <div className="w-[23%] ">
             <Search
               value={ticketsQueryFilters.text!}

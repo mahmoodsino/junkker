@@ -25,6 +25,7 @@ const MainSection = () => {
   const [token, setToken] = useRecoilState(TokenAtom);
   const [buyers, setBuyers] = useState<{ label: String; value: number }[]>([]);
   const [loading, setLoading] = useState(false);
+  const [load,setLoad] = useState(false)
 
   const {
     control,
@@ -54,6 +55,7 @@ const MainSection = () => {
   };
 
   useEffect(() => {
+    setLoad(true)
     const getData = async () => {
       const res = await handelGetBuyer({token:token});
       if (res !== null) {
@@ -84,6 +86,7 @@ const MainSection = () => {
       } else {
         toast.error("some thing wrong");
       }
+      setLoad(false)
     };
     if(token){
       getData();
@@ -116,6 +119,7 @@ const MainSection = () => {
 
   return (
     <div className="py-12 px-7 flex justify-center">
+      {!load ?
       <div className="w-[65%] border bg-[#F4F5F6] rounded-xl pb-5">
         <Title>Gift Junkker</Title>
         <form onSubmit={handleSubmit(submit)}>
@@ -191,7 +195,9 @@ const MainSection = () => {
             </div>
           </div>
         </form>
-      </div>
+      </div> :
+      <Loading className="w-20" />
+      }
     </div>
   );
 };

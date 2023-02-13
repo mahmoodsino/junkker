@@ -50,7 +50,7 @@ const MainSection = () => {
         <div className="overflow-x-auto   mt-5">
           <div className="overflow-hidden mx-5 border rounded-xl">
             <div className="bg-gray5">
-              <div className="py-4 pl-4 flex space-x-7">
+              <div className="py-2 pl-4 flex space-x-7">
                 <div className="w-[25%]">
                   <BaseInput
                     value={usersQueryFilters.text!}

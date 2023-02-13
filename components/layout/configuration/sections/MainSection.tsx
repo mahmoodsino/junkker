@@ -34,6 +34,8 @@ const MainSection = () => {
   const [setting, setSetteing] = useState({} as settingsType);
   const [token, setToken] = useRecoilState(TokenAtom);
   const [loading, setLoading] = useState(false);
+  const [load, setLoad] = useState(false);
+
   const {
     control,
     register,
@@ -45,6 +47,7 @@ const MainSection = () => {
   });
 
   useEffect(() => {
+    setLoad(true);
     const getData = async () => {
       const res = await handelGetSitting(token);
       if (res) {
@@ -52,8 +55,9 @@ const MainSection = () => {
       } else {
         toast.error("some thing went wrong");
       }
+      setLoad(false);
     };
-    if(token){
+    if (token) {
       getData();
     }
   }, [token]);
@@ -66,7 +70,7 @@ const MainSection = () => {
   }, [setting]);
 
   const submit = async (data: IFormInputs) => {
-    setLoading(true)
+    setLoading(true);
     const formD = new FormData();
     formD.append("bid_duration", data.Duration.toString());
     formD.append("juncker_fee", data.fee.toString());
@@ -79,53 +83,62 @@ const MainSection = () => {
     } else {
       toast.error("some thing went wrong");
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   return (
     <div className="py-12 px-10 flex justify-center">
-      <div className="w-[65%] border  rounded-xl  bg-gray2  pb-5">
-        <Title>
-          <Setting className="fill-gray1" />
-          Edit Configuration
-        </Title>
-        <form onSubmit={handleSubmit(submit)} className="mx-5 border-b pb-5">
-          <div className=" py-3 space-y-3">
-            <label className="text-gray1 text-lg block">Junkker Fee</label>
-            <BaseInput
-              name="fee"
-              register={register}
-              placeholder="$65"
-              type="text"
-            />
-            <p className="text-xs text-red1">{errors.fee?.message}</p>
-          </div>
-          <div className=" py-3 space-y-3">
-            <label className="text-gray1 text-lg block">Bid Duration</label>
-            <BaseInput
-              name="Duration"
-              register={register}
-              placeholder="30 minutes"
-              type="text"
-            />
-            <p className="text-xs text-red1">{errors.Duration?.message}</p>
-          </div>
-          <div className=" py-3 space-y-3">
-            <label className="text-gray1 text-lg block">Play Store Link</label>
-            <BaseInput name="playLink" register={register} type="text" />
-          </div>
-          <div className=" py-3 space-y-3">
-            <label className="text-gray1 text-lg block">Apple Store Link</label>
-            <BaseInput name="storeLink" register={register} type="text" />
-          </div>
-          <div className="flex justify-center py-5">
-            {!loading ?
-            <BaseButton type="submit" title="Save Changes" />:
-            <Loading className="w-10" />
-            }
-          </div>
-        </form>
-      </div>
+      {!load ? (
+        <div className="w-[65%] border  rounded-xl  bg-gray2  pb-5">
+          <Title>
+            <Setting className="fill-gray1" />
+            Edit Configuration
+          </Title>
+          <form onSubmit={handleSubmit(submit)} className="mx-5 border-b pb-5">
+            <div className=" py-3 space-y-3">
+              <label className="text-gray1 text-lg block">Junkker Fee</label>
+              <BaseInput
+                name="fee"
+                register={register}
+                placeholder="$65"
+                type="text"
+              />
+              <p className="text-xs text-red1">{errors.fee?.message}</p>
+            </div>
+            <div className=" py-3 space-y-3">
+              <label className="text-gray1 text-lg block">Bid Duration</label>
+              <BaseInput
+                name="Duration"
+                register={register}
+                placeholder="30 minutes"
+                type="text"
+              />
+              <p className="text-xs text-red1">{errors.Duration?.message}</p>
+            </div>
+            <div className=" py-3 space-y-3">
+              <label className="text-gray1 text-lg block">
+                Play Store Link
+              </label>
+              <BaseInput name="playLink" register={register} type="text" />
+            </div>
+            <div className=" py-3 space-y-3">
+              <label className="text-gray1 text-lg block">
+                Apple Store Link
+              </label>
+              <BaseInput name="storeLink" register={register} type="text" />
+            </div>
+            <div className="flex justify-center py-5">
+              {!loading ? (
+                <BaseButton type="submit" title="Save Changes" />
+              ) : (
+                <Loading className="w-10" />
+              )}
+            </div>
+          </form>
+        </div>
+      ) : (
+        <Loading className="w-20" />
+      )}
     </div>
   );
 };

@@ -136,7 +136,7 @@ const MainSection = () => {
     <div className="py-12 px-7">
       <div className="border rounded-xl bg-gray2 pb-5">
         <Title>Unpicked</Title>
-        <div className="flex justify-end mx-5 py-7 ">
+        <div className="flex justify-end mx-5 py-3 ">
           <div className="w-[32%] flex justify-end">
             <Search
               value={ticketsQueryFilters.text!}
@@ -146,7 +146,7 @@ const MainSection = () => {
           </div>
         </div>
         {!loading ? (
-          <div className="overflow-x-auto mt-5 ">
+          <div className="overflow-x-auto ">
             <div className="overflow-hidden mx-5 border rounded-xl">
               <table className="min-w-full ">
                 <thead className="bg-gray5 border-b ">

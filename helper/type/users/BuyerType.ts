@@ -6,8 +6,8 @@ interface BuyerType {
   address: string;
   junkkers: number;
   status: string;
-  lat: null;
-  lng: null;
+  lat: number;
+  lng: number;
   type: string;
 }
 
